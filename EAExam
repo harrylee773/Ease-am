@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrolled Agent Exam Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin-bottom: 15px; }
+        .options button { display: block; margin: 5px 0; padding: 10px; }
+        .correct { color: green; font-weight: bold; }
+        .incorrect { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>IRS Enrolled Agent Exam Quiz</h2>
+    <div id="quiz"></div>
+    <script>
+        const questions = [
+            // Section 1: Individuals
+            { question: "What is the standard deduction for a single filer in 2024?", options: ["$12,950", "$13,850", "$14,600", "$15,700"], answer: "$14,600" },
+            { question: "Which form is used to report self-employment income?", options: ["1040", "1040-SR", "Schedule C", "Schedule A"], answer: "Schedule C" },
+            { question: "What is the maximum annual contribution limit for a traditional IRA in 2024 (under age 50)?", options: ["$5,500", "$6,000", "$6,500", "$7,000"], answer: "$6,500" },
+            // More questions here (Individuals section)...
+
+            // Section 2: Businesses
+            { question: "Form 1065 is used to report income for which type of entity?", options: ["S Corporation", "C Corporation", "Partnership", "Sole Proprietorship"], answer: "Partnership" },
+            { question: "Which tax form is used to report corporate income tax?", options: ["1120", "1065", "1040", "990"], answer: "1120" },
+            { question: "What is the maximum amount a business can expense under Section 179 in 2024?", options: ["$500,000", "$1,000,000", "$1,160,000", "$2,500,000"], answer: "$1,160,000" },
+            // More questions here (Businesses section)...
+
+            // Section 3: Representation, Practices, and Procedures
+            { question: "Which IRS publication provides guidance on taxpayer rights?", options: ["Publication 1", "Publication 17", "Publication 334", "Publication 463"], answer: "Publication 1" },
+            { question: "What is the power of attorney form used for IRS representation?", options: ["Form 2848", "Form 8821", "Form 1040", "Form 1099"], answer: "Form 2848" },
+            { question: "How long does the IRS generally have to audit a tax return?", options: ["1 year", "3 years", "6 years", "10 years"], answer: "3 years" },
+            // More questions here (Representation section)...
+        ];
+
+        const quizContainer = document.getElementById("quiz");
+        
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.classList.add("question");
+            questionDiv.innerHTML = `<p><strong>${index + 1}. ${q.question}</strong></p>`;
+            
+            const optionsDiv = document.createElement("div");
+            optionsDiv.classList.add("options");
+            
+            q.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = function() {
+                    if (option === q.answer) {
+                        this.style.backgroundColor = "lightgreen";
+                        this.insertAdjacentHTML('afterend', '<p class="correct">Correct!</p>');
+                    } else {
+                        this.style.backgroundColor = "lightcoral";
+                        this.insertAdjacentHTML('afterend', '<p class="incorrect">Incorrect!</p>');
+                    }
+                };
+                optionsDiv.appendChild(button);
+            });
+            
+            questionDiv.appendChild(optionsDiv);
+            quizContainer.appendChild(questionDiv);
+        });
+    </script>
+</body>
+</html>
